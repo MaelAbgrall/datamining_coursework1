@@ -2,6 +2,7 @@
 .spyderproject
 .spyproject
 .vscode/
+.ipynb_checkpoints
 
 #Data
 fer2018/
