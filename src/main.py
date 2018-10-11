@@ -7,6 +7,9 @@ import pandas as pd
 import seaborn as sn
 from sklearn.metrics import confusion_matrix
 
+#for diagrams
+import matplotlib.pyplot as plt
+
 #import the csv file
 dataset = filehandler.import_csv('../fer2018/fer2018.csv')
 
