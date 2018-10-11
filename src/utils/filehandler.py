@@ -60,12 +60,12 @@ def split_dataset(number_subset, dataset):
         y_validation = []
         for position in range(number_subset):
             if(position == set_number):
-                x_validation.append(subset_list[position][:, 1])
-                y_validation.append(subset_list[position][:, 0])
+                x_validation.append(subset_list[position][:, 1].tolist())
+                y_validation.append(subset_list[position][:, 0].tolist())
 
             if(position != set_number):
-                x_train.append(subset_list[position][:, 1])
-                y_train.append(subset_list[position][:, 0])
+                x_train.append(subset_list[position][:, 1].tolist())
+                y_train.append(subset_list[position][:, 0].tolist())
         
         set_list.append( 
             (numpy.concatenate(x_train), numpy.concatenate(y_train), numpy.concatenate(x_validation), numpy.concatenate(y_validation))
