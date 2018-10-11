@@ -26,6 +26,7 @@ Classifier initialization
 """
 knc = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=3)
 
+print("Fitting data...")
 start_time = time.time()
 knc.fit(x_train, y_train)
 print(time.time() - start_time, "seconds to fit data")
@@ -33,6 +34,7 @@ print(time.time() - start_time, "seconds to fit data")
 """
 Running the algorithm. preds will hold the class predictions
 """
+print("Making predictions...")
 start_time = time.time()
 preds = knc.predict(x_validation)
 print(time.time() - start_time, "seconds to predict the classes")
