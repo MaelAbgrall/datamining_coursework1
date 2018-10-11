@@ -18,7 +18,8 @@ for position in range(10):
    (x_train, y_train, x_validation, y_validation) = set_list[position]
 
 
-#Classification: Performance of the Nearest Neighbour Algorithm on the given data set
+
+# Classification: Performance of the Nearest Neighbour Algorithm on the given data set
 
 """
 Classifier initialization
@@ -29,17 +30,12 @@ start_time = time.time()
 knc.fit(x_train, y_train)
 print(time.time() - start_time, "seconds to fit data")
 
-
-
-
 """
 Running the algorithm. preds will hold the class predictions
 """
 start_time = time.time()
 preds = knc.predict(x_validation)
 print(time.time() - start_time, "seconds to predict the classes")
-
-
 
 
 """
@@ -51,29 +47,21 @@ accuracy = correct_count / len(preds)
 print(accuracy)
 
 
-#Classification Accuracy Calculation
-
-
-
+# Classification Accuracy Calculation
 
 """
 Computing confusion matrix to evaluate classification accuracy
 """
-
 confusion_matrix = confusion_matrix(y_validation, preds)
-
 
 
 """
 Plotting the confusion matrix
 """
-
 df_cm = pd.DataFrame(confusion_matrix, index = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral'],
                   columns = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral'])
 plt.figure(figsize = (8, 6))
 sn.heatmap(df_cm, annot=True, fmt="d", cmap='Greys')
-
-
 
 """
 Plotting the accuracy histogram
