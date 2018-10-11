@@ -1,5 +1,6 @@
 import utils.filehandler as filehandler
 from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
 import time
 
 # for confusion matrix
