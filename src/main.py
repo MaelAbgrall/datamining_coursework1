@@ -40,7 +40,7 @@ def overall_accuracy(predictions, actual):
     """
     total = len(predictions)
     correct_count = (predictions == actual).sum()
-    print(correct_count, " out of ", total, " correctly predicted")
+    print(correct_count, " out of", total, "correctly predicted")
     accuracy = (correct_count / total) * 100
     print(accuracy, "% correctly predicted")
     
@@ -98,12 +98,43 @@ def get_k_best(X, y, k):
 
 def reduce_attr(data, attr_indices):
     """
-    saves the data at certain indices (which are in attr_indices) into new
+    saves the data at certain indices (which are in attr_indices)
+    into the new dataset
     """
     new = []
     for i in range(len(data)):
         new.append([data[i][index] for index in attr_indices])
     return new
+
+
+def reduce_ind(new, data, attr_indices):
+    """
+    saves the data at certain indices (which are in attr_indices) into new
+    """
+    new.append([data[index] for index in attr_indices])
+
+
+def reduce_by_emo(x, y, num):
+    """
+    transforms the given dataset to keep num amount of attributes
+    """
+    new_data = []
+    for i in range(len(x)):
+        if (y[i] == 0):
+            reduce_ind(new_data, x[i], top_attrs_emo[num][0]) # num best attributes for angry emotion
+        if (y[i] == 1):
+            reduce_ind(new_data, x[i], top_attrs_emo[num][1]) # num best attributes for disgust emotion
+        if (y[i] == 2):
+            reduce_ind(new_data, x[i], top_attrs_emo[num][2]) # num best attributes for fear emotion
+        if (y[i] == 3):
+            reduce_ind(new_data, x[i], top_attrs_emo[num][3]) # num best attributes for happy emotion
+        if (y[i] == 4):
+            reduce_ind(new_data, x[i], top_attrs_emo[num][4]) # num best attributes for sad emotion
+        if (y[i] == 5):
+            reduce_ind(new_data, x[i], top_attrs_emo[num][5]) # num best attributes for surprise emotion
+        if (y[i] == 6):
+            reduce_ind(new_data, x[i], top_attrs_emo[num][6]) # num best attributes for neutral emotion
+    return new_data
 
 
 """
@@ -205,3 +236,40 @@ print("14 attribute classification")
 preds = get_knn_preds(knc, x_train_14, y_train, x_validation_14)
 overall_accuracy(preds, y_validation)
 accuracy_plots(preds, y_validation)
+
+
+"""
+DATASET REDUCTION BASED ON CLASS
+"""
+# 2, 5, and 10 non-class attribute reduction:
+# the top attributes of each specific emotion
+top_attrs_emo = {2 : [x_angry_2, x_disgust_2, x_fear_2, x_happy_2, x_sad_2, x_surprise_2, x_neutral_2],
+                5 : [x_angry_5, x_disgust_5, x_fear_5, x_happy_5, x_sad_5, x_surprise_5, x_neutral_5],
+                10 : [x_angry_10, x_disgust_10, x_fear_10, x_happy_10, x_sad_10, x_surprise_10, x_neutral_10]}
+
+# transforming the overall emotion dataset
+x_train_10 = reduce_by_emo(x_train, y_train, 10)
+x_train_5 = reduce_by_emo(x_train, y_train, 5)
+x_train_2 = reduce_by_emo(x_train, y_train, 2)
+x_validation_10 = reduce_by_emo(x_validation, y_validation, 10)
+x_validation_5 = reduce_by_emo(x_validation, y_validation, 5)
+x_validation_2 = reduce_by_emo(x_validation, y_validation, 2)
+
+
+"""
+2nd ATTEMPT TO IMPROVE CLASSIFICATION WITH NEW DATASETS
+"""
+print("10 attribute classification")
+preds = get_knn_preds(knc, x_train_10, y_train, x_validation_10)
+overall_accuracy(preds, y_validation)
+accuracy_plots(preds, y_validation
+
+print("5 attribute classification")
+preds = get_knn_preds(knc, x_train_5, y_train, x_validation_5)
+overall_accuracy(preds, y_validation)
+accuracy_plots(preds, y_validation
+
+print("2 attribute classification")
+preds = get_knn_preds(knc, x_train_2, y_train, x_validation_2)
+overall_accuracy(preds, y_validation)
+accuracy_plots(preds, y_validation
