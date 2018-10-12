@@ -28,7 +28,7 @@ def get_knn_preds(knc, X, y, X_test):
     
     print("Making predictions...")
     start_time = time.time()
-    predictions = knc.predict(x_test)
+    predictions = knc.predict(X_test)
     print(time.time() - start_time, "seconds to predict the classes")
     
     return predictions
