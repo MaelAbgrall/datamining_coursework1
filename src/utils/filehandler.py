@@ -71,3 +71,16 @@ def split_dataset(number_subset, dataset):
             (numpy.concatenate(x_train), numpy.concatenate(y_train), numpy.concatenate(x_validation), numpy.concatenate(y_validation))
             )
     return set_list
+
+def get_data(path, number_subset=10, sep=True):
+    """
+    gets the data from the csv file
+    if sep = False the data won't be split into training and testing data
+    """
+    data_set = import_csv(path)
+    data_list = split_dataset(number_subset, data_set)
+    for position in range(number_subset):
+        (x_train, y_train, x_validation, y_validation) = data_list[position]
+    if (sep):
+        return (x_train, y_train, x_validation, y_validation)
+    return (numpy.concatenate((x_train, x_validation)), numpy.concatenate((y_train, y_validation)))
