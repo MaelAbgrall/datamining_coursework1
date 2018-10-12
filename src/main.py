@@ -1,27 +1,19 @@
 import utils.filehandler as filehandler
 import utils.learning as lrn
-import time
 import numpy as np
 
 #for k nearest neighbor
 from sklearn.neighbors import KNeighborsClassifier
 
-#for feature selection
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import f_regression
-
-# for confusion matrix
-from sklearn.metrics import confusion_matrix
-import pandas as pd
-import seaborn as sn
-
-#for diagrams
-import matplotlib.pyplot as plt
 
 """
 IMPORTING DATA FROM CSV FILE
 """
 x_train, y_train, x_validation, y_validation = filehandler.get_data('../fer2018/fer2018.csv')
+
+
+# dictionary to save and compare accuracy for different amounts of attributes
+acc_dct = {}
 
 
 """
@@ -36,8 +28,9 @@ preds = lrn.get_knn_preds(knc, x_train, y_train, x_validation)
 """
 CLASSIFICATION ACCURACY CALCULATION
 """
-lrn.overall_accuracy(preds, y_validation)
-lrn.accuracy_plots(preds, y_validation)
+lrn.overall_accuracy(acc_dct, '2304', preds, y_validation)
+lrn.accuracy_plots('2304', preds, y_validation)
+
 
 
 """
@@ -105,18 +98,18 @@ ATTEMPT TO IMPROVE CLASSIFICATION WITH NEW DATASETS
 """
 print("70 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_70, y_train, x_validation_70)
-lrn.overall_accuracy(preds, y_validation)
-lrn.accuracy_plots(preds, y_validation)
+lrn.overall_accuracy(acc_dct, '70', preds, y_validation)
+lrn.accuracy_plots('70', preds, y_validation)
 
 print("35 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_35, y_train, x_validation_35)
-lrn.overall_accuracy(preds, y_validation)
-lrn.accuracy_plots(preds, y_validation)
+lrn.overall_accuracy(acc_dct, '35', preds, y_validation)
+lrn.accuracy_plots('35', preds, y_validation)
 
 print("14 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_14, y_train, x_validation_14)
-lrn.overall_accuracy(preds, y_validation)
-lrn.accuracy_plots(preds, y_validation)
+lrn.overall_accuracy(acc_dct, '14', preds, y_validation)
+lrn.accuracy_plots('14', preds, y_validation)
 
 
 """
@@ -142,15 +135,21 @@ x_validation_2 = lrn.reduce_data_emo(x_validation, y_validation, 2)
 """
 print("10 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_10, y_train, x_validation_10)
-lrn.overall_accuracy(preds, y_validation)
-lrn.accuracy_plots(preds, y_validation)
+lrn.overall_accuracy(acc_dct, '10', preds, y_validation)
+lrn.accuracy_plots('10', preds, y_validation)
 
 print("5 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_5, y_train, x_validation_5)
-lrn.overall_accuracy(preds, y_validation)
-lrn.accuracy_plots(preds, y_validation)
+lrn.overall_accuracy(acc_dct, '5', preds, y_validation)
+lrn.accuracy_plots('5', preds, y_validation)
 
 print("2 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_2, y_train, x_validation_2)
-lrn.overall_accuracy(preds, y_validation)
-lrn.accuracy_plots(preds, y_validation)
+lrn.overall_accuracy(acc_dct, '2', preds, y_validation)
+lrn.accuracy_plots('2', preds, y_validation)
+
+
+"""
+ACCURACY SUMMARY
+"""
+lrn.disp_acc_summary(acc_dct)

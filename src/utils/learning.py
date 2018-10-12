@@ -35,18 +35,20 @@ def get_knn_preds(knc, X, y, X_test):
     return predictions
 
 
-def overall_accuracy(predictions, actual):
+def overall_accuracy(dct, num_attr, predictions, actual):
     """
-    Overall accuracy calculation
+    Calculates overall accuracy and adds it to the dictionary
     """
     total = len(predictions)
     correct_count = (predictions == actual).sum()
     print(correct_count, " out of ", total, " correctly predicted")
-    accuracy = (correct_count / total) * 100
-    print(accuracy, "% correctly predicted")
+    accuracy = (correct_count / total)
+    print(accuracy * 100, "% correctly predicted")
+    dct[num_attr] = accuracy
+    return accuracy
     
 
-def disp_confusion_matrix(predictions, actual):
+def disp_confusion_matrix(num_attr, predictions, actual):
     """
     displays the confusion matrix
     """
@@ -57,12 +59,13 @@ def disp_confusion_matrix(predictions, actual):
                   columns = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral'])
     plt.figure(figsize = (8, 6))
     sn.heatmap(df_cm, annot=True, fmt="d", cmap='Greys')
+    plt.title('Confusion Matrix for %s Attributes', num_attr)
     plt.show()
     plt.clf()
     return confusion_mat
 
     
-def disp_accuracy_hist(cm, predictions, actual):
+def disp_accuracy_hist(num_attr, cm, predictions, actual):
     """
     displays the accuracy histogram
     """
@@ -76,15 +79,32 @@ def disp_accuracy_hist(cm, predictions, actual):
     positions = np.arange(7)
     plt.bar(positions, acc, bar_width)
     plt.xticks(positions + bar_width / 2, ('Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral'))
+    plt.title('Histogram of Prediction Accuracy for %s Attributes', num_attr)
+    plt.xlabel('Emotions')
+    plt.ylabel('Accuracy')
+    plt.show()
+    plt.clf()
+
+
+def disp_acc_summary(dct):
+    """
+    displays a histogram that summarizes the prediction accuracies based on
+    the number of attributes
+    """
+    bar_width = 1
+    plt.bar(dct.keys(), dct.values(), bar_width, color='r')
+    plt.title('Histogram of Prediction Accuracy by Number of Attributes')
+    plt.xlabel('Number of Attributes')
+    plt.ylabel('Accuracy')
     plt.show()
     plt.clf()
     
 
-def accuracy_plots(predictions, actual):
+def accuracy_plots(num_attr, predictions, actual):
     """
     displays the confusion matrix and the accuracy histogram
     """
-    disp_accuracy_hist(disp_confusion_matrix(predictions, actual), predictions, actual)
+    disp_accuracy_hist(num_attr, disp_confusion_matrix(num_attr, predictions, actual), predictions, actual)
 
 
 def get_k_best(X, y, k):
