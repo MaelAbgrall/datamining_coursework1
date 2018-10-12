@@ -1,5 +1,5 @@
 import utils.filehandler as filehandler
-import utils.learning as lrn
+import learning as lrn
 import numpy as np
 
 #for k nearest neighbor
