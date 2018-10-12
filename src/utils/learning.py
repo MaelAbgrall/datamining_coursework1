@@ -58,7 +58,8 @@ def disp_confusion_matrix(num_attr, predictions, actual):
                   columns = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral'])
     plt.figure(figsize = (8, 6))
     sn.heatmap(df_cm, annot=True, fmt="d", cmap='Greys')
-    plt.title('Confusion Matrix for %s Attributes', num_attr)
+    title = 'Confusion Matrix for ' + num_attr + ' Attributes'
+    plt.title(title)
     plt.show()
     plt.clf()
     return confusion_mat
@@ -78,7 +79,8 @@ def disp_accuracy_hist(num_attr, cm, predictions, actual):
     positions = np.arange(7)
     plt.bar(positions, acc, bar_width)
     plt.xticks(positions + bar_width / 2, ('Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral'))
-    plt.title('Histogram of Prediction Accuracy for %s Attributes', num_attr)
+    title = 'Histogram of Prediction Accuracy for ' + num_attr + ' Attributes'
+    plt.title(title)
     plt.xlabel('Emotions')
     plt.ylabel('Accuracy')
     plt.show()
