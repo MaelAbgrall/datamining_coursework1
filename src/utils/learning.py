@@ -136,24 +136,24 @@ def reduce_attr_emo(new, data, attr_indices):
     new.append([data[index] for index in attr_indices])
 
 
-def reduce_data_emo(x, y, num):
+def reduce_data_emo(top_attrs, x, y, num):
     """
     transforms the given dataset to keep num amount of attributes
     """
     new_data = []
     for i in range(len(x)):
         if (y[i] == 0):
-            reduce_attr_emo(new_data, x[i], top_attrs_emo[num][0]) # num best attributes for angry emotion
+            reduce_attr_emo(new_data, x[i], top_attrs[num][0]) # num best attributes for angry emotion
         if (y[i] == 1):
-            reduce_attr_emo(new_data, x[i], top_attrs_emo[num][1]) # num best attributes for disgust emotion
+            reduce_attr_emo(new_data, x[i], top_attrs[num][1]) # num best attributes for disgust emotion
         if (y[i] == 2):
-            reduce_attr_emo(new_data, x[i], top_attrs_emo[num][2]) # num best attributes for fear emotion
+            reduce_attr_emo(new_data, x[i], top_attrs[num][2]) # num best attributes for fear emotion
         if (y[i] == 3):
-            reduce_attr_emo(new_data, x[i], top_attrs_emo[num][3]) # num best attributes for happy emotion
+            reduce_attr_emo(new_data, x[i], top_attrs[num][3]) # num best attributes for happy emotion
         if (y[i] == 4):
-            reduce_attr_emo(new_data, x[i], top_attrs_emo[num][4]) # num best attributes for sad emotion
+            reduce_attr_emo(new_data, x[i], top_attrs[num][4]) # num best attributes for sad emotion
         if (y[i] == 5):
-            reduce_attr_emo(new_data, x[i], top_attrs_emo[num][5]) # num best attributes for surprise emotion
+            reduce_attr_emo(new_data, x[i], top_attrs[num][5]) # num best attributes for surprise emotion
         if (y[i] == 6):
-            reduce_attr_emo(new_data, x[i], top_attrs_emo[num][6]) # num best attributes for neutral emotion
+            reduce_attr_emo(new_data, x[i], top_attrs[num][6]) # num best attributes for neutral emotion
     return new_data

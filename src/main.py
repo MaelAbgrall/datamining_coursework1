@@ -122,12 +122,12 @@ top_attrs_emo = {2 : [x_angry_2, x_disgust_2, x_fear_2, x_happy_2, x_sad_2, x_su
                 10 : [x_angry_10, x_disgust_10, x_fear_10, x_happy_10, x_sad_10, x_surprise_10, x_neutral_10]}
 
 # transforming the overall emotion dataset
-x_train_10 = lrn.reduce_data_emo(x_train, y_train, 10)
-x_train_5 = lrn.reduce_data_emo(x_train, y_train, 5)
-x_train_2 = lrn.reduce_data_emo(x_train, y_train, 2)
-x_validation_10 = lrn.reduce_data_emo(x_validation, y_validation, 10)
-x_validation_5 = lrn.reduce_data_emo(x_validation, y_validation, 5)
-x_validation_2 = lrn.reduce_data_emo(x_validation, y_validation, 2)
+x_train_10 = lrn.reduce_data_emo(top_attrs_emo, x_train, y_train, 10)
+x_train_5 = lrn.reduce_data_emo(top_attrs_emo, x_train, y_train, 5)
+x_train_2 = lrn.reduce_data_emo(top_attrs_emo, x_train, y_train, 2)
+x_validation_10 = lrn.reduce_data_emo(top_attrs_emo, x_validation, y_validation, 10)
+x_validation_5 = lrn.reduce_data_emo(top_attrs_emo, x_validation, y_validation, 5)
+x_validation_2 = lrn.reduce_data_emo(top_attrs_emo, x_validation, y_validation, 2)
 
 
 """
