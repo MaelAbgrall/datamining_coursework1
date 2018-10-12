@@ -84,7 +84,7 @@ top_attrs = {2 : np.array([x_angry_2, x_disgust_2, x_fear_2, x_happy_2, x_sad_2,
         	5 : np.array([x_angry_5, x_disgust_5, x_fear_5, x_happy_5, x_sad_5, x_surprise_5, x_neutral_5]).flatten(),
         	10 : np.array([x_angry_10, x_disgust_10, x_fear_10, x_happy_10, x_sad_10, x_surprise_10, x_neutral_10]).flatten()}
 
-print("Reducing datasets...")
+print("\nReducing datasets...")
 x_train_70 = lrn.reduce_attr(x_train, top_attrs[10])
 x_train_35 = lrn.reduce_attr(x_train, top_attrs[5])
 x_train_14 = lrn.reduce_attr(x_train, top_attrs[2])
@@ -96,17 +96,17 @@ x_validation_14 = lrn.reduce_attr(x_validation, top_attrs[2])
 """
 ATTEMPT TO IMPROVE CLASSIFICATION WITH NEW DATASETS
 """
-print("70 attribute classification")
+print("\n70 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_70, y_train, x_validation_70)
 lrn.overall_accuracy(acc_dct, '70', preds, y_validation)
 lrn.accuracy_plots('70', preds, y_validation)
 
-print("35 attribute classification")
+print("\n35 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_35, y_train, x_validation_35)
 lrn.overall_accuracy(acc_dct, '35', preds, y_validation)
 lrn.accuracy_plots('35', preds, y_validation)
 
-print("14 attribute classification")
+print("\n14 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_14, y_train, x_validation_14)
 lrn.overall_accuracy(acc_dct, '14', preds, y_validation)
 lrn.accuracy_plots('14', preds, y_validation)
@@ -133,17 +133,17 @@ x_validation_2 = lrn.reduce_data_emo(top_attrs_emo, x_validation, y_validation, 
 """
 2nd ATTEMPT TO IMPROVE CLASSIFICATION WITH NEW DATASETS
 """
-print("10 attribute classification")
+print("\n10 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_10, y_train, x_validation_10)
 lrn.overall_accuracy(acc_dct, '10', preds, y_validation)
 lrn.accuracy_plots('10', preds, y_validation)
 
-print("5 attribute classification")
+print("\n5 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_5, y_train, x_validation_5)
 lrn.overall_accuracy(acc_dct, '5', preds, y_validation)
 lrn.accuracy_plots('5', preds, y_validation)
 
-print("2 attribute classification")
+print("\n2 attribute classification")
 preds = lrn.get_knn_preds(knc, x_train_2, y_train, x_validation_2)
 lrn.overall_accuracy(acc_dct, '2', preds, y_validation)
 lrn.accuracy_plots('2', preds, y_validation)
