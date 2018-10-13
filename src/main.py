@@ -20,7 +20,7 @@ acc_dct = {}
 CLASSIFICATION WITH NEAREST NEIGHBOR ALGORITHM
 """
 # Classifier initialization
-knc = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=3)
+knc = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=3, weights='distance')
 
 preds = lrn.get_knn_preds(knc, x_train, y_train, x_validation)
 
